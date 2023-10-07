@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <DevTools/>
+    <AppAlertInfo/>
     <router-view/>
   </div>
 </template>
@@ -8,15 +9,16 @@
 <script lang="ts">
   import Vue from "vue";
   import DevTools from "@/components/global-components/app-devtool.vue"
+  import AppAlertInfo from "@/features/alertInfo/main.vue"
 
   export default Vue.extend({
 
       components: {
-          DevTools
+          DevTools,
+          AppAlertInfo
       }
   })
 </script>
-
 
 <style>
   @font-face {

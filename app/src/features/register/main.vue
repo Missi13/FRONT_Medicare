@@ -100,7 +100,7 @@
                                 <div class="row">
                                     <div class="col"> 
                                         <div class="champs">
-                                            <input type="password" maxlength="25" class="form-control" required  v-model="password">
+                                            <input type="password" maxlength="25" class="form-control" :class="isPasswordValid()" required  v-model="password">
                                             <label>Mot de passe</label>
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@
                             </div>
                         </form>
 
-                        <button type="submit" class="bouttonInscription btn" >Créer un Compte</button>
+                        <button type="submit" class="bouttonInscription btn" @click.prevent="createUser()">Créer un Compte</button>
                     </div>
 
                     <!-- Connexion -->
@@ -143,11 +143,11 @@
 
 
 <script lang="ts">
+import Vue from "vue";
 import { utils } from "@/utils";
 import store from "@/store";
 
-export default {
-
+export default Vue.extend({
     name: 'RegisterInscription',
     data(){
         return { 
@@ -177,35 +177,30 @@ export default {
             return utils.isPhoneNumberValid(this.phoneNumber)
         },
 
-        isPasswordValid(password: string): string {
-            return utils.isPasswordValid(password)
+        isPasswordValid(): string {
+            return utils.isPasswordValid(this.password)
         },
 
         isNamevalid(name: string): string {
             return utils.isNameValid(name)
         },
 
-        isYearValid(year: string): string {
-            return utils.isYearValid(year)
+        isYearValid(): string {
+            return utils.isYearValid(this.year)
         },
 
-        isDayValid(day: string): string {
-            return utils.isDayValid(day)
-        },
-        
-        isMonthValid(month: string): string {
-            return utils.isMonthValid(month)
+        isDayValid(): string {
+            return utils.isDayValid(this.day)
         },
         
-
-
-
+        isMonthValid(): string {
+            return utils.isMonthValid(this.month)
+        },
         
 
 
-/*
+// Creation
         createUser(){
-            
             let dateString = this.year+"/"+this.month+"/"+this.day;
             var dateOfBirth = new Date(dateString);
 
@@ -229,11 +224,11 @@ export default {
                 this.year !== '' && utils.isYearValid(this.year) === 'is-valid' &&
                 this.gender !== ''){
 
-                store.dispatch("inscription/createNewUser", userParams)
+                store.dispatch("register/registerUser", userParams)
             }else{
                 this.isChampsValid = false;
                 this.isSubmitValid = false;
-                setTimeout(this.resetIsSubmit, 8000);
+                setTimeout(this.resetIsSubmit, 5000);
             }
 
             if (this.lastName === '' ||
@@ -249,23 +244,21 @@ export default {
             }else{
                 this.champsVide = false
             }
-           
         },
 
         resetIsSubmit(){
             this.isSubmitValid = true
         },
-*/
+
 
 
 
 
     }
-}
+})
 </script>
 
 <style scoped>
-
     .bande{
         position: absolute;
         width: 100%;
@@ -425,5 +418,4 @@ export default {
         color: Gray;
         border-radius: 10px;
     }
-
 </style>
