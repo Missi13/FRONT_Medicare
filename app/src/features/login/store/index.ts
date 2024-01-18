@@ -1,12 +1,10 @@
 import { getters } from "./getters";
 import { actions } from "./actions";
 import { mutations } from "./mutations";
-import ColorAlert from "@/utils/EnumColorAlert"
+
 const state = {
-    message: "Message par default",
-    color: ColorAlert.INFO,
-    show: false
-}
+    loginError: false,
+};
 
 export default {
     namespaced: true,
@@ -14,5 +12,4 @@ export default {
     getters,
     actions,
     mutations
-
 };

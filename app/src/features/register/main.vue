@@ -18,12 +18,12 @@
                         <h2 class="titre">Inscription</h2>
 
                         <form class="row justify-content-center">
-                            <div class="formGauche col-6">
+                            <div class="formGauche col-6">                              
+
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="champs">
                                             <input type="text" maxlength="25" class="form-control" :class="isNamevalid(lastName)" required v-model="lastName">
-
                                             <label>Nom</label>
                                         </div>
                                     </div>
@@ -88,6 +88,16 @@
                             </div>
 
                             <div class="formGauche col-6">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="champs">
+                                            <input type="text" maxlength="25" required class="form-control" :class="isLoginValid()" v-model="login">
+                                            <label>Login</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="row">
                                     <div class="col"> 
                                         <div class="champs">
@@ -151,6 +161,7 @@ export default Vue.extend({
     name: 'RegisterInscription',
     data(){
         return { 
+            login: "",
             lastName: "",
             firstName: "",
             phoneNumber: "",
@@ -169,6 +180,10 @@ export default Vue.extend({
 
     methods:{
         
+        isLoginValid(): string {
+            return utils.isLoginValid(this.login)
+        },
+
         isEmailValid(): string {
             return utils.isEmailValid(this.email)
         },
@@ -208,6 +223,7 @@ export default Vue.extend({
                 lastName: this.lastName,
                 firstName: this.firstName,
                 phoneNumber: this.phoneNumber,
+                login: this.login,
                 email: this.email,
                 password: this.password,
                 dateOfBirth: dateOfBirth,
@@ -217,6 +233,7 @@ export default Vue.extend({
             if (this.lastName !== '' && utils.isNameValid(this.lastName) === 'is-valid' &&
                 this.firstName !== '' && utils.isNameValid(this.firstName) === 'is-valid' &&
                 this.phoneNumber !== '' && utils.isPhoneNumberValid(this.phoneNumber) === 'is-valid' &&
+                this.login !== '' && utils.isLoginValid(this.login) === 'is-valid' &&
                 this.email !== '' && utils.isEmailValid(this.email) === 'is-valid' &&
                 this.password !== '' && utils.isPasswordValid(this.password) === 'is-valid' &&
                 this.day !== '' &&  utils.isDayValid(this.day) === 'is-valid' &&
@@ -234,6 +251,7 @@ export default Vue.extend({
             if (this.lastName === '' ||
                 this.firstName === '' ||
                 this.phoneNumber === '' ||
+                this.login === '' ||
                 this.email === '' ||
                 this.password === '' ||
                 this.day === '' ||
@@ -249,12 +267,8 @@ export default Vue.extend({
         resetIsSubmit(){
             this.isSubmitValid = true
         },
-
-
-
-
-
-    }
+    },
+    
 })
 </script>
 

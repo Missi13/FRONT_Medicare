@@ -2,6 +2,7 @@ import Genders from '@/utils/EnumGenders';
 
 export class User{
 	private id: string;
+	private login: string;
     private firstName: string;
 	private lastName: string;
 	private phoneNumber: string;
@@ -12,6 +13,7 @@ export class User{
     
     constructor(user: any) {
 		this.id = user.id;
+		this.login = user.login;
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.phoneNumber = user.phoneNumber;
@@ -27,6 +29,14 @@ export class User{
 
 	public setId(id: string): void {
 		this.id = id;
+	}
+
+	public getLogin(): string {
+		return this.login;
+	}
+
+	public setLogin(login: string): void {
+		this.login = login;
 	}
 
     public getFirstName(): string {

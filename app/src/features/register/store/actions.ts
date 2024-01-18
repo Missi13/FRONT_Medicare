@@ -18,11 +18,11 @@ export const registerUser: Action< RegisterState, RootState > = ({ dispatch, com
 
             dispatch("alertInfo/showAlertInfo", {
                 color: ColorAlert.SUCCESS,
-                message: "Compte crée avec succés !",
+                message: "Votre compte a été crée avec succés !",
                 show: true
             }, { root: true })
             
-            router.push("/");
+            router.push("/login");
 
             resolve("Success");
         }).catch((error) => {

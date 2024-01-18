@@ -30,8 +30,8 @@
                         <h2 class="titre">Connexion</h2>
                         <form class="formulaire">
                             <div class="inputBox">
-                                <input type="text" name="" required="true" maxlength="25" v-model="email">
-                                <label>E-mail</label>
+                                <input type="text" name="" required="true" maxlength="25" v-model="username">
+                                <label>Login</label>
                             </div>
 
                             <div class="inputBox">
@@ -40,7 +40,7 @@
                                 <p class="mdpOublie">Mot de passe oublié ?</p>
                             </div>
                         
-                            <button type="button" class="bouttonConnexion btn">Se connecter</button>
+                            <button type="button" class="bouttonConnexion btn" @click.prevent="authenticate()">Se connecter</button>
                         </form>
                     </div>
 
@@ -58,20 +58,36 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
+import store from '@/store';
 
-export default {
+
+export default Vue.extend({
     name: 'LoginConnexion',
     data(){
         return{
-            email: null,
+            username: null,
             password: null
         }
     },
 
     methods:{
+
+//Authenticate
+        authenticate(){
+            
+            let userParams =  {
+                username: this.username,
+                password: this.password
+            }
+
+            if(this.username !== '' && this.password !== ''){
+                store.dispatch("login/loginUser", userParams)
+            }
+        }
         
     }
-}
+})
 </script>
 
 <style scoped>

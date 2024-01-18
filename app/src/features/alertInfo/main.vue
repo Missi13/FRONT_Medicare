@@ -1,9 +1,8 @@
 <template>
-  
-  <div class="text-center alerte alert-dismissible fade show" :class="getAlertColor" role="alert" v-show="getIsAlertShow">
+  <div class="text-center alerte alert alert-dismissible fade show" :class="getAlertColor" role="alert" v-show="getIsAlertShow">
     <strong>{{ getAlertMessage }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click.prevent="resetNotification()"></button>
-  </div>
+  </div> 
 
 </template>
 

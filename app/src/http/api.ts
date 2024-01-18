@@ -1,18 +1,19 @@
 import axios from "axios";
 import { User } from '@/models/Users';
-import $config from "@/config";
+import { LoginUser } from '@/models/LoginUser';
+//import $config from "@/config";
 
-axios.defaults.baseURL = $config.getApiURL();
+axios.defaults.baseURL = "http://localhost:8080/";
 
 export default {
 
     UserController: {
         register(user: User) {
-            return axios.post("/user/register", user);
+            return axios.post("api/register", user);
         },
 
-        login(user: User) {
-            return axios.post("/user/login", user);
+        authenticate(loginUser: LoginUser) {
+            return axios.post("api/authenticate", loginUser);
         },
     }
 }
