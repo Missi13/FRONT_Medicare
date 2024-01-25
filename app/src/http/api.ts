@@ -4,6 +4,7 @@ import { LoginUser } from '@/models/LoginUser';
 //import $config from "@/config";
 
 axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token') 
 
 export default {
 
@@ -15,5 +16,9 @@ export default {
         authenticate(loginUser: LoginUser) {
             return axios.post("api/authenticate", loginUser);
         },
+
+        getUser() {
+            return axios.get("api/account");
+        }
     }
 }

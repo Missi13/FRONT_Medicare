@@ -11,7 +11,7 @@ export class User{
 	private dateOfBirth: Date;
 	private gender: Genders;
     
-    constructor(user: any) {
+    constructor(user: User) {
 		this.id = user.id;
 		this.login = user.login;
         this.firstName = user.firstName;

@@ -13,6 +13,7 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
         
         api.UserController.authenticate(user)
         .then((rep) => {
+            localStorage.setItem('token', rep.data.id_token);
 
             console.log(rep.data)
 
