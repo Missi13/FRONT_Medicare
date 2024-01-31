@@ -9,6 +9,14 @@
             </li>
 
             <li>
+                <router-link to="/MonCompte">MonCompte</router-link>
+            </li>
+
+            <li>
+                <router-link to="/ListeDesPatients">ListeDesPatients</router-link>
+            </li>
+
+            <li>
                 <router-link to="/register">Inscription</router-link>
             </li>
 

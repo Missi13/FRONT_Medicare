@@ -9,22 +9,28 @@
                     <div class="col-9 bleu"></div>
                     <div class="col-3 vert"></div>
                 </div>
+
+                <div class="col">
+                    <strong>{{ user.firstName }}</strong>
+                    <strong>{{  }} </strong>
+                    <strong>{{ user.lastName }}</strong>
+                </div>
                 
-                <strong>{{ user.firstName }}</strong>
-                <br>
-                <strong>{{ user.lastName }}</strong>
+                
             </div>
         </div>
 
         <!-- body -->
         <div class="body row">
-            
-            <div class="navigation col-2">
-                Navigation
+
+            <!-- barre de navigation -->
+            <div class="navigation col-3">
+                <navbar/>
             </div>
 
-            <div class="affichage col-10">
-                Affichage
+            <!-- affichage -->
+            <div class="affichage col-9">
+                <router-view/>
             </div>
         </div>
 
@@ -49,18 +55,18 @@
 // import axios from "axios";
 import Vue from "vue";
 import store from "@/store";
-// import { User } from "@/models/Users";
-// import navbar from "@/components/navbar-components/app-navbar.vue"
+import { User } from "@/models/Users";
+import navbar from "@/components/navbar-components/app-navbar.vue"
 export default Vue.extend({
     name: 'MonAcceuil',
     data(){
         return{
-            user: ""
+            user: User
         }
     },
 
     components:{
-        // navbar
+        navbar
     },
 
     methods:{
@@ -102,6 +108,10 @@ export default Vue.extend({
     }
 
     .navigation{
+        height: 90vh;
+    }
+
+    .affichage{
         background: #335c67;
         height: 90vh;
     }
