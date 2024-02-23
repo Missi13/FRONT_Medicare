@@ -16,11 +16,11 @@ export const getUser: Action< UserState, RootState > = ({ dispatch }) => {
 
         }).catch((error) => {
 
-            dispatch("alertInfo/showAlertInfo", {
-                color: ColorAlert.DANGER,
-                message: "Erreur d'authentification !",
-                show: true
-            }, { root: true })
+            // dispatch("alertInfo/showAlertInfo", {
+            //     color: ColorAlert.DANGER,
+            //     message: "Erreur d'authentification !",
+            //     show: true
+            // }, { root: true })
 
             console.error("Erreur d'authentification !", error);
             reject("Fail")

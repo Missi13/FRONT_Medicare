@@ -28,9 +28,44 @@ const routes: Array<RouteConfig> = [
         component: () => import("@/features/home/monCompte/main.vue"),
       },
       {
+        path: '/configuration',
+        name: 'configuration',
+        component: () => import("@/features/home/configuration/main.vue"),
+      },
+      {
         path: '/listeDesPatients',
         name: 'listeDesPatients',
         component: () => import("@/features/home/listeDesPatients/main.vue"),
+      },
+      {
+        path: '/consultation',
+        name: 'consultation',
+        component: () => import("@/features/home/consultation/main.vue"),
+      },
+      {
+        path: '/ordonnance',
+        name: 'ordonnance',
+        component: () => import("@/features/home/ordonnance/main.vue"),
+      },
+      {
+        path: '/certificats',
+        name: 'certificats',
+        component: () => import("@/features/home/certificats/main.vue"),
+      },
+      {
+        path: '/exploration',
+        name: 'exploration',
+        component: () => import("@/features/home/exploration/main.vue"),
+      },
+      {
+        path: '/historique',
+        name: 'historique',
+        component: () => import("@/features/home/historique/main.vue"),
+      },
+      {
+        path: '/rendezVous',
+        name: 'rendezVous',
+        component: () => import("@/features/home/rendezVous/main.vue"),
       }
 
     ]

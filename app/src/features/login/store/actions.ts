@@ -24,8 +24,8 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
             }, { root: true })
             
             router.push("/");
+            // resolve("Success");
 
-            resolve("Success");
         }).catch((error) => {
             commit(s.SET_LOGIN_ERROR, true)
 
@@ -36,7 +36,7 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
             }, { root: true })
 
             console.error("Erreur lors de la connexion :", error);
-            reject("Fail")
+            // reject("Fail")
         })
     })
 };
