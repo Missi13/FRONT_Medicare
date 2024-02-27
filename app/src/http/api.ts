@@ -1,5 +1,6 @@
 import axios from "axios";
 import { User } from '@/models/Users';
+import { Patient } from '@/models/Patients';
 import { LoginUser } from '@/models/LoginUser';
 //import $config from "@/config";
 
@@ -19,6 +20,20 @@ export default {
 
         getUser() {
             return axios.get("api/account");
+        }
+    },
+
+    PatientController: {
+        create(patient: Patient) {
+            return axios.post("api/patients", patient);
+        },
+
+        getPatient(patientId: string) {
+            return axios.get("api/patients/" + patientId);
+        },
+
+        getAllPatients() {
+            return axios.get("api/patients");
         }
     }
 }
