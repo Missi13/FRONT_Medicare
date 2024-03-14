@@ -1,4 +1,4 @@
-import { ActionTree, Action } from 'vuex';
+import { ActionTree, Action, Store } from 'vuex';
 import { LoginState, LOGIN_STORE as s } from './types';
 import { RootState } from '@/store/types';
 import api from '@/http/api';
@@ -7,15 +7,15 @@ import router from '@/router';
 import ColorAlert from '@/utils/EnumColorAlert';
 
 
+
 export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit }, userParams) => {
     return new Promise((resolve, reject) => {
         const user = userParams as LoginUser;
         
         api.UserController.authenticate(user)
-        .then((rep) => {
-            localStorage.setItem('token', rep.data.id_token);
-
-            console.log(rep.data)
+        .then((response) => {
+            localStorage.removeItem('userData');
+            localStorage.setItem('token', response.data.id_token);
 
             dispatch("alertInfo/showAlertInfo", {
                 color: ColorAlert.SUCCESS,
@@ -23,12 +23,11 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
                 show: true
             }, { root: true })
             
-            router.push("/");
-            // resolve("Success");
+            router.push("/listeDesPatients");
+
+            resolve(response.data);
 
         }).catch((error) => {
-            commit(s.SET_LOGIN_ERROR, true)
-
             dispatch("alertInfo/showAlertInfo", {
                 color: ColorAlert.DANGER,
                 message: "Connexion échoué !",
@@ -41,12 +40,27 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
     })
 };
 
-export const resetLoginError: Action< LoginState, RootState > = ({ commit }) => {
-    commit(s.SET_LOGIN_ERROR, false)
+
+
+
+
+export const logoutUser: Action< LoginState, RootState > = ({ dispatch, commit }) => {
+    return new Promise((resolve, reject) => {
+        
+        localStorage.removeItem('token');
+
+        dispatch("alertInfo/showAlertInfo", {
+            color: ColorAlert.INFO,
+            message: "Vous êtes déconnecté !",
+            show: true
+        }, { root: true })
+
+        router.push("/login");
+    })
 };
 
 
 export const actions: ActionTree<LoginState, RootState> = {
     loginUser,
-    resetLoginError
+    logoutUser
 };

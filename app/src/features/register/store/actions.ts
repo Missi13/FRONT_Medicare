@@ -12,9 +12,9 @@ export const registerUser: Action< RegisterState, RootState > = ({ dispatch, com
         const user = userParams as User;
         
         api.UserController.register(user)
-        .then((rep) => {
+        .then((response) => {
 
-            console.log(rep.data)
+            console.log(response.data)
 
             dispatch("alertInfo/showAlertInfo", {
                 color: ColorAlert.SUCCESS,

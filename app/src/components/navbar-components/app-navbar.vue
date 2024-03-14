@@ -68,7 +68,7 @@
             <div class="dropdown">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>Prénom Nom</strong>
+                    <strong>{{ getUser.firstName }} {{ getUser.lastName }}</strong>
                 </a>
             
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -86,11 +86,11 @@
                     </li>
                     
                     <li><hr class="dropdown-divider"></li>
-                    <li>
-                        <router-link class="dropdown-item" :to="{name:'login'}">
+                    <li @click.prevent=logout()>
+                        <div class="dropdown-item">
                             <img class="icons-drop rounded-circle me-2" src="@/assets/logout.svg">
                             <span>Déconnexion</span>
-                        </router-link>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -101,14 +101,27 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from "vue";
+import  { mapGetters } from 'vuex';
+import store from "@/store";
+export default Vue.extend({
     name: 'NavBar',
     data() {
         return {
-            selectedItem: 0
         }
     },
-}
+
+    methods:{
+        logout(){
+            store.dispatch("home/deleteUser")
+            store.dispatch("login/logoutUser")
+        }
+    },
+
+    computed: {
+    ...mapGetters("home", ["getUser"]),
+    }
+})
 
 </script>
 

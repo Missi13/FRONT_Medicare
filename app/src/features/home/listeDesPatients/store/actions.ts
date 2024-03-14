@@ -1,36 +1,33 @@
 import { ActionTree, Action } from 'vuex';
-import { UserState, USER_STORE as u } from './types';
+import { PatientState, PATIENT_STORE as p } from './types';
 import { RootState } from '@/store/types';
 import api from '@/http/api';
 import router from '@/router';
 import ColorAlert from '@/utils/EnumColorAlert';
 
-export const getUser: Action< UserState, RootState > = ({ dispatch, commit }) => {
+export const getAllPatients: Action< PatientState, RootState > = ({ dispatch, commit }) => {
     return new Promise((resolve, reject) => {
 
         if(localStorage.getItem('token')) {
 
-            api.UserController.getUser()
+            api.PatientController.getAllPatients()
             .then((response) => {
-                commit(u.SET_USER, response.data);
+                commit(p.SET_PATIENTS, response.data);
                 resolve(response.data);
 
             }).catch((error) => {
 
                 console.error("Erreur d'authentification !", error);
-                // revoir la route pour home pour ne pas confondre avec des les routes fils ...
-                // router.push("/login");
+                router.push("/login");
 
                 dispatch("alertInfo/showAlertInfo", {
                     color: ColorAlert.INFO,
                     message: "veuillez vous authentifier pour continuer !",
                     show: true
                 }, { root: true })
-                // reject("Fail")
             }) 
         } else {
-            // revoir la route pour home pour ne pas confondre avec des les routes fils ...
-            // router.push("/login");
+            router.push("/login");
 
             dispatch("alertInfo/showAlertInfo", {
                 color: ColorAlert.INFO,
@@ -41,13 +38,7 @@ export const getUser: Action< UserState, RootState > = ({ dispatch, commit }) =>
     })
 };
 
-export const deleteUser: Action< UserState, RootState > = ({ dispatch, commit }) => {
-    commit(u.DELETE_USER);
-    console.log("user effacé !")
-};
 
-
-export const actions: ActionTree<UserState, RootState> = {
-    getUser,
-    deleteUser
+export const actions: ActionTree<PatientState, RootState> = {
+    getAllPatients
 };

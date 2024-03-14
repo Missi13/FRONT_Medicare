@@ -15,17 +15,18 @@
                         <th scope="col">Date_De_Naissance</th>
                         <th scope="col">E-mail</th>
                         <th scope="col">Sexe</th>
+                        <th scope="col">Date_De_Création</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr v-for="patient in patients" :key="patient.id">
+                    <tr v-for="patient in getAllPatients" :key="patient.id">
                         <th scope="row">{{patient.id}}</th>
                         <td>{{ patient.lastName }}</td>
                         <td>{{ patient.firstName }}</td>
                         <td>{{ patient.dateOfBirth }}</td>
                         <td>{{ patient.email }}</td>
                         <td>{{ patient.gender }}</td>
+                        <td>{{ patient.createdDate }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -37,22 +38,25 @@
     </div>
 </template>
 
-<script lang="ts">
+<script >
 // import axios from "axios";
 import Vue from "vue";
 import store from "@/store";
-import { Patient } from "@/models/Patients";
+import  { mapGetters } from 'vuex';
 export default Vue.extend({
     name: 'ListeDesPatients',
     data(){
         return{
-            patients: [Patient]
         }
     },
 
+    computed: {
+    ...mapGetters("listeDesPatients", ["getAllPatients"]),
+    },
+
+
     mounted(){
-        store.dispatch("home/getAllPatients")
-        .then(response => this.patients = response);
+        store.dispatch("listeDesPatients/getAllPatients")
     }
 
 })

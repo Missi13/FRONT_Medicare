@@ -8,6 +8,10 @@ export class Patient{
 	private gender: Genders;
 	private dateOfBirth: Date;
 	private email: string;
+	private createdBy: string;
+	private createdDate: Date;
+	private lastModifiedBy: string;
+	private lastModifiedDate: Date;
     
     constructor(patient: Patient) {
 		this.id = patient.id;
@@ -17,6 +21,10 @@ export class Patient{
         this.gender = patient.gender;
         this.dateOfBirth = patient.dateOfBirth;
 		this.email = patient.email;
+		this.createdBy = patient.createdBy;
+		this.createdDate = patient.createdDate;
+		this.lastModifiedBy = patient.lastModifiedBy;
+		this.lastModifiedDate = patient.lastModifiedDate;
     }
 
 	public getId(): string {
@@ -73,6 +81,38 @@ export class Patient{
 
 	public setEmail(email: string): void {
 		this.email = email;
+	}
+
+	public getCreatedBy(): string {
+		return this.createdBy;
+	}
+
+	public setCreatedBy(createdBy: string): void {
+		this.createdBy = createdBy;
+	}
+
+	public getCreatedDate(): Date {
+		return this.createdDate;
+	}
+
+	public setCreatedDate(createdDate: Date): void {
+		this.createdDate = createdDate;
+	}
+
+	public getLastModifiedBy(): string {
+		return this.lastModifiedBy;
+	}
+
+	public setLastModifiedBy(lastModifiedBy: string): void {
+		this.lastModifiedBy = lastModifiedBy;
+	}
+
+	public getLastModifiedDate(): Date {
+		return this.lastModifiedDate;
+	}
+
+	public setLastModifiedDate(lastModifiedDate: Date): void {
+		this.lastModifiedDate = lastModifiedDate;
 	}
 
 }

@@ -4,8 +4,12 @@ import { User } from '@/models/Users';
 
 export const mutations: MutationTree<UserState> = {
 
-    [s.SET_USER](state, newVal: User) {
+    [s.SET_USER](state, newVal) {
         state.user = newVal;
+    },
+
+    [s.DELETE_USER](state) {
+        state.user = null
     },
     
 }

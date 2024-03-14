@@ -1,10 +1,10 @@
 import { getters } from "./getters";
 import { actions } from "./actions";
 import { mutations } from "./mutations";
-import { User } from '@/models/Users';
+import { Patient } from '@/models/Patients';
 
 const state = {
-    user: User || null,
+    patients: [Patient],
 };
 
 export default {

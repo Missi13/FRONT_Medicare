@@ -31,37 +31,18 @@
                     <router-view/>
                 </div>
             </div>
-        
-        
-
-
-
-
-
-
-
-
-
-         <!-- navbar -->
-        <!-- <header>
-            <navbar/>
-        </header> -->
-        
-
     </div>
 </template>
 
 <script lang="ts">
-// import axios from "axios";
 import Vue from "vue";
+// import  { mapGetters } from 'vuex';
 import store from "@/store";
-import { User } from "@/models/Users";
 import navbar from "@/components/navbar-components/app-navbar.vue"
 export default Vue.extend({
     name: 'MonAcceuil',
     data(){
         return{
-            user: User
         }
     },
 
@@ -69,14 +50,13 @@ export default Vue.extend({
         navbar
     },
 
-    methods:{
-        
+    mounted(){
+        store.dispatch("home/getUser");
     },
 
-    mounted(){
-        store.dispatch("home/getUser")
-        .then(response => this.user = response);
-    }
+    // computed: {
+    //     ...mapGetters("home", ["getUser"]),
+    // },
 
 })
 </script>

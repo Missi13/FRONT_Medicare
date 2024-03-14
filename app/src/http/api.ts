@@ -5,7 +5,9 @@ import { LoginUser } from '@/models/LoginUser';
 //import $config from "@/config";
 
 axios.defaults.baseURL = "http://localhost:8080/";
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token') 
+// à revoir ! le token ne se reinitialise pas seul !!!
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+console.log('le token est: ' + localStorage.getItem("token"))
 
 export default {
 
