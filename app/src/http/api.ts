@@ -2,12 +2,10 @@ import axios from "axios";
 import { User } from '@/models/Users';
 import { Patient } from '@/models/Patients';
 import { LoginUser } from '@/models/LoginUser';
-//import $config from "@/config";
+// import $config from "@/config";
 
 axios.defaults.baseURL = "http://localhost:8080/";
-// à revoir ! le token ne se reinitialise pas seul !!!
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
-console.log('le token est: ' + localStorage.getItem("token"))
+// axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
 
 export default {
 
@@ -21,21 +19,41 @@ export default {
         },
 
         getUser() {
-            return axios.get("api/account");
+            return axios.get("api/account", 
+            {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            });
         }
     },
 
     PatientController: {
         create(patient: Patient) {
-            return axios.post("api/patients", patient);
+            return axios.post("api/patients", patient, 
+            {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            });
         },
 
         getPatient(patientId: string) {
-            return axios.get("api/patients/" + patientId);
+            return axios.get("api/patients/" + patientId, 
+            {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            });
         },
 
         getAllPatients() {
-            return axios.get("api/patients");
+            return axios.get("api/patients", 
+            {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            });
         }
     }
 }

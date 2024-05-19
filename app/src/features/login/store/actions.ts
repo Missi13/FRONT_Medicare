@@ -14,7 +14,6 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
         
         api.UserController.authenticate(user)
         .then((response) => {
-            localStorage.removeItem('userData');
             localStorage.setItem('token', response.data.id_token);
 
             dispatch("alertInfo/showAlertInfo", {
@@ -22,12 +21,13 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
                 message: "Vous êtes connecté !",
                 show: true
             }, { root: true })
-            
-            router.push("/listeDesPatients");
+
+            router.push("/MonCompte");
 
             resolve(response.data);
 
         }).catch((error) => {
+
             dispatch("alertInfo/showAlertInfo", {
                 color: ColorAlert.DANGER,
                 message: "Connexion échoué !",

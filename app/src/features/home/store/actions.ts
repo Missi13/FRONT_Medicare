@@ -17,9 +17,8 @@ export const getUser: Action< UserState, RootState > = ({ dispatch, commit }) =>
 
             }).catch((error) => {
 
-                console.error("Erreur d'authentification !", error);
-                // revoir la route pour home pour ne pas confondre avec des les routes fils ...
-                // router.push("/login");
+                console.error("Erreur lors de la récuperation du user !", error);
+                router.push("/login");
 
                 dispatch("alertInfo/showAlertInfo", {
                     color: ColorAlert.INFO,
@@ -29,8 +28,7 @@ export const getUser: Action< UserState, RootState > = ({ dispatch, commit }) =>
                 // reject("Fail")
             }) 
         } else {
-            // revoir la route pour home pour ne pas confondre avec des les routes fils ...
-            // router.push("/login");
+            router.push("/login");
 
             dispatch("alertInfo/showAlertInfo", {
                 color: ColorAlert.INFO,
