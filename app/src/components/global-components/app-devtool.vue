@@ -9,11 +9,11 @@
             </li>
 
             <li>
-                <router-link to="/register">Inscription</router-link>
+                <router-link to="/login">connexion</router-link>
             </li>
 
             <li>
-                <router-link to="/login">connexion</router-link>
+                <router-link to="/register">Inscription</router-link>
             </li>
 
         </ul>

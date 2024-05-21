@@ -1,3 +1,8 @@
+function isLoginValid(login: string): string {
+    const nameRegex = /^(([a-zA-Z0-9]*))$/;
+    return login == "" ? "" : nameRegex.test(login) ? "is-valid" : "is-invalid";
+}
+
 function isEmailValid(email: string): string {
     const emailRegex =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/;
@@ -49,6 +54,7 @@ function isAdressValid(adress: string): string {
 }
 
 export const utils = {
+    isLoginValid,
     isEmailValid,
     isPhoneNumberValid,
     isPasswordValid,

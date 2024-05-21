@@ -18,12 +18,12 @@
                         <h2 class="titre">Inscription</h2>
 
                         <form class="row justify-content-center">
-                            <div class="formGauche col-6">
+                            <div class="formGauche col-6">                              
+
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="champs">
                                             <input type="text" maxlength="25" class="form-control" :class="isNamevalid(lastName)" required v-model="lastName">
-
                                             <label>Nom</label>
                                         </div>
                                     </div>
@@ -39,8 +39,11 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="champs">
-                                            <input type="text" maxlength="25" required class="form-control" :class="isPhoneNumberValid(phoneNumber)" v-model="phoneNumber">
+                                            <input type="text" maxlength="25" required class="form-control" :class="isPhoneNumberValid()" v-model="phoneNumber">
                                             <label>Numéro de téléphone</label>
+                                            <div class="invalid-feedback" v-if="!isChampsValid">
+                                                Veuillez saisir un numéro de téléphone valide. Exemples: +33 6 12345678 ou 0612345678.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,10 +88,20 @@
                             </div>
 
                             <div class="formGauche col-6">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="champs">
+                                            <input type="text" maxlength="25" required class="form-control" :class="isLoginValid()" v-model="login">
+                                            <label>Login</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="row">
                                     <div class="col"> 
                                         <div class="champs">
-                                            <input type="text" maxlength="25" class="form-control" required :class="isEmailValid(email)" v-model="email">
+                                            <input type="text" maxlength="25" class="form-control" :class="isEmailValid()" required  v-model="email">
                                             <label>E-mail</label>
                                         </div>
                                     </div>
@@ -97,7 +110,7 @@
                                 <div class="row">
                                     <div class="col"> 
                                         <div class="champs">
-                                            <input type="password" maxlength="25" class="form-control" required :class="isPasswordValid(password)" v-model="password">
+                                            <input type="password" maxlength="25" class="form-control" :class="isPasswordValid()" required  v-model="password">
                                             <label>Mot de passe</label>
                                         </div>
                                     </div>
@@ -118,7 +131,7 @@
                             </div>
                         </form>
 
-                        <button type="button" class="bouttonInscription btn">Créer un Compte</button>
+                        <button type="submit" class="bouttonInscription btn" @click.prevent="createUser()">Créer un Compte</button>
                     </div>
 
                     <!-- Connexion -->
@@ -140,13 +153,15 @@
 
 
 <script lang="ts">
+import Vue from "vue";
 import { utils } from "@/utils";
+import store from "@/store";
 
-export default {
-
+export default Vue.extend({
     name: 'RegisterInscription',
     data(){
-        return{
+        return { 
+            login: "",
             lastName: "",
             firstName: "",
             phoneNumber: "",
@@ -155,44 +170,109 @@ export default {
             year: "",
             email: "",
             password: "",
-            gender: ""
+            gender: "",
+
+            isChampsValid : true,
+            isSubmitValid : true,
+            champsVide : false
         }
     },
 
     methods:{
-        isEmailValid(email: string): string {
-            return utils.isEmailValid(email)
+        
+        isLoginValid(): string {
+            return utils.isLoginValid(this.login)
         },
 
-        isPhoneNumberValid(phone: string): string {
-            return utils.isPhoneNumberValid(phone)
+        isEmailValid(): string {
+            return utils.isEmailValid(this.email)
         },
 
-        isPasswordValid(password: string): string {
-            return utils.isPasswordValid(password)
+        isPhoneNumberValid(): string {
+            return utils.isPhoneNumberValid(this.phoneNumber)
+        },
+
+        isPasswordValid(): string {
+            return utils.isPasswordValid(this.password)
         },
 
         isNamevalid(name: string): string {
             return utils.isNameValid(name)
         },
 
-        isYearValid(year: string): string {
-            return utils.isYearValid(year)
+        isYearValid(): string {
+            return utils.isYearValid(this.year)
         },
 
-        isDayValid(day: string): string {
-            return utils.isDayValid(day)
+        isDayValid(): string {
+            return utils.isDayValid(this.day)
         },
         
-        isMonthValid(month: string): string {
-            return utils.isMonthValid(month)
+        isMonthValid(): string {
+            return utils.isMonthValid(this.month)
         },
-    }
-}
+        
+
+
+// Creation
+        createUser(){
+            let dateString = this.year+"/"+this.month+"/"+this.day;
+            var dateOfBirth = new Date(dateString);
+
+            let userParams = {
+                lastName: this.lastName,
+                firstName: this.firstName,
+                phoneNumber: this.phoneNumber,
+                login: this.login,
+                email: this.email,
+                password: this.password,
+                dateOfBirth: dateOfBirth,
+                gender: this.gender
+            };
+            
+            if (this.lastName !== '' && utils.isNameValid(this.lastName) === 'is-valid' &&
+                this.firstName !== '' && utils.isNameValid(this.firstName) === 'is-valid' &&
+                this.phoneNumber !== '' && utils.isPhoneNumberValid(this.phoneNumber) === 'is-valid' &&
+                this.login !== '' && utils.isLoginValid(this.login) === 'is-valid' &&
+                this.email !== '' && utils.isEmailValid(this.email) === 'is-valid' &&
+                this.password !== '' && utils.isPasswordValid(this.password) === 'is-valid' &&
+                this.day !== '' &&  utils.isDayValid(this.day) === 'is-valid' &&
+                this.month !== '' && utils.isMonthValid(this.month) === 'is-valid' &&
+                this.year !== '' && utils.isYearValid(this.year) === 'is-valid' &&
+                this.gender !== ''){
+
+                store.dispatch("register/registerUser", userParams)
+            }else{
+                this.isChampsValid = false;
+                this.isSubmitValid = false;
+                setTimeout(this.resetIsSubmit, 5000);
+            }
+
+            if (this.lastName === '' ||
+                this.firstName === '' ||
+                this.phoneNumber === '' ||
+                this.login === '' ||
+                this.email === '' ||
+                this.password === '' ||
+                this.day === '' ||
+                this.month === '' ||
+                this.year === '' ||
+                this.gender === ''){
+                this.champsVide = true
+            }else{
+                this.champsVide = false
+            }
+        },
+
+        resetIsSubmit(){
+            this.isSubmitValid = true
+        },
+    },
+    
+})
 </script>
 
 <style scoped>
-
     .bande{
         position: absolute;
         width: 100%;
@@ -352,5 +432,4 @@ export default {
         color: Gray;
         border-radius: 10px;
     }
-
 </style>
