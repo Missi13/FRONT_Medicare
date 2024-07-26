@@ -73,7 +73,7 @@
             
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                     <li>
-                        <router-link class="dropdown-item" :to="{name:'monCompte'}">
+                        <router-link class="dropdown-item" :to="{name:'informations'}">
                             <img class="icons-drop rounded-circle me-2" src="@/assets/account_circle.svg">
                             <span>Mon compte</span>
                         </router-link>
@@ -135,99 +135,3 @@ export default Vue.extend({
 
 
 </style>
-
-
-
-
-
-
-/* button{
-    cursor: pointer;
-    appearance: none;
-    border: none;
-    outline: none;
-    background: none;
-}
-
-.nav-item{
-}
-
-.nav-link{
-}
-
-.navigation{
-    background-color: #335c67;
-}
-
-.iconMonCompte{
-    height: auto;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.titreItem{
-    display: flex;
-    text-decoration: none;
-    font-size: 20px;
-    transition: 0.2s;
-}
-
-.titreItem:hover{
-    color: #eaf8bf;
-}
-
-p{
-    margin: 0px;
-}
-
-.button{
-    
-} */
-
-
-
-
-
-
-
-
-<!-- <aside class="navigation navbar-light">
-        <ul class="navbar-nav">
-            <li class="button nav-item">
-                <router-link active-class="active" class="nav-link" :to="{name:'monCompte'}">
-                    <button class="titreItem">
-                        <img class="iconMonCompte" src="@/assets/account_circle_active.svg" v-if="$route.name == 'monCompte'">
-                        <img class="iconMonCompte" src="@/assets/account_circle_desactive.svg" v-else>
-                        
-                        <p>Mon compte</p>
-                    </button>
-                </router-link>
-            </li>
-
-            <li class="nav-item">
-                <router-link active-class="active" class="nav-link" :to="{name:'listeDesPatients'}">
-                    <button class="titreItem">
-                        <img class="iconMonCompte" src="@/assets/group_active.svg" v-if="$route.name == 'listeDesPatients'">
-                        <img class="iconMonCompte" src="@/assets/group_desactive.svg" v-else>
-                        
-                        <p>Liste des patients</p>
-                    </button>
-                </router-link>                
-            </li>
-        </ul>
-        
-                Mon compte
-                Liste des patients
-                Consultation
-                Ordonnance
-                Exploration
-                Certificats
-                Pièces jointes
-                Protocoles
-                Historique
-                Réglement
-                Rendez-vous
-                Paramètres
-                Statistiques
-                Manuel d'utilisation
-    </aside> -->

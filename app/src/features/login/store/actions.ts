@@ -22,7 +22,7 @@ export const loginUser: Action< LoginState, RootState > = ({ dispatch, commit },
                 show: true
             }, { root: true })
 
-            router.push("/MonCompte");
+            router.push("/Informations");
 
             resolve(response.data);
 

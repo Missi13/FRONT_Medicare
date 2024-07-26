@@ -4,6 +4,7 @@ import { mutations } from "./mutations";
 
 const state = {
     registerError: false,
+    updateError: false,
 };
 
 export default {

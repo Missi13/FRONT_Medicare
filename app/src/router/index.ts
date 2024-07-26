@@ -26,6 +26,18 @@ const routes: Array<RouteConfig> = [
         path: '/monCompte',
         name: 'monCompte',
         component: () => import("@/features/home/monCompte/main.vue"),
+        children:[
+          {
+            path: '/informations',
+            name: 'informations',
+            component: () => import("@/features/home/monCompte/informations/main.vue"),
+          },
+          {
+            path: '/update',
+            name: 'update',
+            component: () => import("@/features/home/monCompte/update/main.vue"),
+          },
+        ]
       },
       {
         path: '/configuration',

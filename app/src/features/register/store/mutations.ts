@@ -6,5 +6,9 @@ export const mutations: MutationTree<RegisterState> = {
     [s.SET_REGISTER_ERROR](state, newVal: boolean) {
         state.registerError = newVal;
     },
+
+    [s.SET_UPDATE_ERROR](state, newVal: boolean) {
+        state.updateError = newVal;
+    },
     
 }
