@@ -59,7 +59,7 @@ export const updateUser: Action< RegisterState, RootState > = ({ dispatch, commi
                 show: true
             }, { root: true })
             
-            router.push("/monCompte/informations");
+            router.push("/informations");
 
             resolve("Success");
         }).catch((error) => {

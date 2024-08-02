@@ -1,5 +1,3 @@
-import { getUser } from "../../store/getters";
-
 <template>
     <div class="container-fluid row align-items-center">
         <div class="col">
@@ -48,7 +46,7 @@ import { getUser } from "../../store/getters";
                     <div class="row">
                         <div class="col">
                             <div class="champsDesabled">
-                                <input disabled class="text-gray" v-model="login">
+                                <input disabled class="text-gray" v-model="getUser.login">
                                 <label>Login</label>
                             </div>
                         </div>
@@ -57,7 +55,7 @@ import { getUser } from "../../store/getters";
                     <div class="row">
                         <div class="col"> 
                             <div class="champsDesabled">
-                                <input disabled class="text-gray" v-model="email">
+                                <input disabled class="text-gray" v-model="getUser.email">
                                 <label>E-mail</label>
                             </div>
                         </div>
@@ -87,6 +85,8 @@ import { getUser } from "../../store/getters";
             <button type="submit" class="bouttonEnregistrer btn" @click.prevent="updateUser()">
                 <span>Enregistrer</span>
             </button>
+
+
         </div>
     </div>
     
@@ -95,20 +95,18 @@ import { getUser } from "../../store/getters";
 <script lang="">
 import Vue from "vue";
 import { mapGetters } from "vuex";
-import { getUser } from "@/store/getters";
-import { utils } from "@/utils";
 import store from "@/store";
 export default Vue.extend({
     name: 'UpdateMonCompte',
     data(){
         return{
-            id: getUser.id,
-            login: getUser.login,
-            email: "",
+            id: null,
+            login: null,
+            email: null,
             lastName: "",
             firstName: "",
             phoneNumber: "",
-            dateOfBirth: getUser.dateOfBirth,
+            dateOfBirth: "",
             gender: "",
 
             isChampsValid : true,
@@ -122,16 +120,19 @@ export default Vue.extend({
     },
 
     methods: {
+        setValues(){
+            this.firstName= this.getUser.firstName,
+            this.lastName= this.getUser.lastName,
+            this.phoneNumber= this.getUser.phoneNumber,
+            this.dateOfBirth= this.getUser.dateOfBirth,
+            this.gender= this.getUser.gender
+        },
+
         updateUser(){
-            // this.id = 1001;
-            // this.login = "missi";
-            // this.email = getUser.email;
-
-
             let userParams = {
-                id: this.id,
-                login: getUser.login,
-                
+                id: this.getUser.id,
+                login: this.getUser.login,
+                email: this.getUser.email,
                 lastName: this.lastName,
                 firstName: this.firstName,
                 phoneNumber: this.phoneNumber,
@@ -139,35 +140,14 @@ export default Vue.extend({
                 gender: this.gender
             };
 
-            console.log("userParams.id: " + userParams.id)
-            
-            // if (this.lastName !== '' && utils.isNameValid(this.lastName) === 'is-valid' &&
-            //     this.firstName !== '' && utils.isNameValid(this.firstName) === 'is-valid' &&
-            //     this.phoneNumber !== '' && utils.isPhoneNumberValid(this.phoneNumber) === 'is-valid' &&
-            //     // this.dateOfBirth !== '' && utils.isDateOfBirthValid(this.dateofBirth) === 'is-valid' &&
-            //     this.gender !== ''){
+            // "1900-01-01T05:00:00.000Z"
 
-                store.dispatch("register/updateUser", userParams)
-
-            // }else{
-            //     this.isChampsValid = false;
-            //     this.isSubmitValid = false;
-            //     setTimeout(this.resetIsSubmit, 5000);
-            // }
-
-            // if (this.lastName === '' ||
-            //     this.firstName === '' ||
-            //     this.phoneNumber === '' ||
-            //     this.gender === ''){
-            //     this.champsVide = true
-            // }else{
-            //     this.champsVide = false
-            // }
+            store.dispatch("register/updateUser", userParams)
         },
+    },
 
-        resetIsSubmit(){
-            this.isSubmitValid = true
-        },
+    mounted(){
+        this.setValues();
     }
 
 })
@@ -280,7 +260,7 @@ export default Vue.extend({
         font-weight: bold
     }
 
-    .dateNaissance, .genre{
+    .genre{
         font-weight: 800;
         color: #335c67;
     }

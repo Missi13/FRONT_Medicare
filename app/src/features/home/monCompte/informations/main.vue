@@ -101,6 +101,10 @@ export default Vue.extend({
     computed: {
     ...mapGetters("home", ["getUser"]),
     },
+
+    mounted(){
+        store.dispatch("home/getUser");
+    }
 })
 
 </script>
