@@ -13,6 +13,14 @@ export default {
         register(user: User) {
             return axios.post("api/register", user);
         },
+        
+        update(user: User) {
+            return axios.post("api/update", user, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                }
+            });
+        },
 
         authenticate(loginUser: LoginUser) {
             return axios.post("api/authenticate", loginUser);
@@ -30,7 +38,7 @@ export default {
 
     PatientController: {
         create(patient: Patient) {
-            return axios.post("api/patients", patient, 
+            return axios.post("api/patient", patient, 
             {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -39,7 +47,7 @@ export default {
         },
 
         getPatient(patientId: string) {
-            return axios.get("api/patients/" + patientId, 
+            return axios.get("api/patient/" + patientId, 
             {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')

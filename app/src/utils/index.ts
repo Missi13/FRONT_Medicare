@@ -10,7 +10,7 @@ function isEmailValid(email: string): string {
 }
 
 function isPhoneNumberValid(numero: string): string {
-    const numeroRegex = /^((0+([0-9]{9}))|(\+([0-9]{2,3} )+([1-9] )+[0-9]{8}))$/;
+    const numeroRegex = /^((\+([1-9]{1} )+([1-9]{10}))|(0+([0-9]{9}))|(\+([0-9]{2,3} )+[0-9]{9}))$/;
     return numero.length === 0 ? "" : numeroRegex.test(numero) ? "is-valid" : "is-invalid";
 }
 
@@ -35,7 +35,13 @@ function isDayValid(jour: string): string {
 }
 
 function isMonthValid(mois: string): string {
-    return mois === "" ? "" : "is-valid";
+    const jourRegex = /^(0[1-9]|1[0-2])$/;
+    return mois === "" ? "" : mois.length == 10 && jourRegex.test(mois) ? "is-valid" : "is-invalid";
+}
+
+function isDateValid(date: string): string {
+    const jourRegex = /^(19+[0-9]+[0-9]|20+[0-1]+[0-9]|202+[0-4])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+    return date === "" ? "" : date.length == 10 && jourRegex.test(date) ? "is-valid" : "is-invalid";
 }
 
 function isLinkValid(value: string): string {
@@ -62,6 +68,7 @@ export const utils = {
     isYearValid,
     isDayValid,
     isMonthValid,
+    isDateValid,
     isLinkValid,
     isNumberValid,
     isAdressValid

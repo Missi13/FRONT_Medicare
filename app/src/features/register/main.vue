@@ -25,6 +25,9 @@
                                         <div class="champs">
                                             <input type="text" maxlength="25" class="form-control" :class="isNamevalid(lastName)" required v-model="lastName">
                                             <label>Nom</label>
+                                            <div class="invalid-feedback" v-if="!isChampsValid">
+                                                ce champ doit contenir des lettres uniquement.
+                                            </div>
                                         </div>
                                     </div>
 
@@ -32,6 +35,9 @@
                                         <div class="champs">
                                             <input type="text" maxlength="25" required class="form-control" :class="isNamevalid(firstName)" v-model="firstName">
                                             <label>Prénom</label>
+                                            <div class="invalid-feedback" v-if="!isChampsValid">
+                                                Ce champ doit contenir des lettres uniquement.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +48,7 @@
                                             <input type="text" maxlength="25" required class="form-control" :class="isPhoneNumberValid()" v-model="phoneNumber">
                                             <label>Numéro de téléphone</label>
                                             <div class="invalid-feedback" v-if="!isChampsValid">
-                                                Veuillez saisir un numéro de téléphone valide. Exemples: +33 6 12345678 ou 0612345678.
+                                                Veuillez saisir un numéro de téléphone valide. Exemples: +213 556142261 ou 0556142261
                                             </div>
                                         </div>
                                     </div>
@@ -94,6 +100,9 @@
                                         <div class="champs">
                                             <input type="text" maxlength="25" required class="form-control" :class="isLoginValid()" v-model="login">
                                             <label>Login</label>
+                                            <div class="invalid-feedback" v-if="!isChampsValid">
+                                                Ce champ ne doit pas contenir des caractères spéciaux.
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -103,6 +112,9 @@
                                         <div class="champs">
                                             <input type="text" maxlength="25" class="form-control" :class="isEmailValid()" required  v-model="email">
                                             <label>E-mail</label>
+                                            <div class="invalid-feedback" v-if="!isChampsValid">
+                                                Veuillez saisir une adrresse email valide. Exemples: exemple@gmail.com
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -112,6 +124,12 @@
                                         <div class="champs">
                                             <input type="password" maxlength="25" class="form-control" :class="isPasswordValid()" required  v-model="password">
                                             <label>Mot de passe</label>
+                                            <div class="invalid-feedback" v-if="!isChampsValid">
+                                                Le mot de passe doit contenir au minimum 8 caractères dont :<br>
+                                                - une lettre minuscule.<br>
+                                                - une lettre majuscule.<br>
+                                                - un chiffre.<br>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

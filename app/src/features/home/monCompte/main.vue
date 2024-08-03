@@ -1,25 +1,22 @@
 <template>
-    <div class="container-fluid">
-
-        <strong>Mon Compte</strong>
+    
+    <router-view/>
         
-
-    </div>
 </template>
 
-<script lang="ts">
+<script lang="">
 import Vue from "vue";
+import { mapGetters } from "vuex";
 export default Vue.extend({
     name: 'MonCompte',
     data(){
         return{
-
         }
+    },
+
+    computed: {
+    ...mapGetters("home", ["getUser"]),
     }
 
 })
 </script>
-
-<style scoped>
-
-</style>
