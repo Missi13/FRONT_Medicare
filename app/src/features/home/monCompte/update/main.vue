@@ -92,17 +92,15 @@
     
 </template>
 
-<script lang="">
+<script lang="ts">
 import Vue from "vue";
 import { mapGetters } from "vuex";
+import { utils } from "@/utils";
 import store from "@/store";
 export default Vue.extend({
     name: 'UpdateMonCompte',
     data(){
         return{
-            id: null,
-            login: null,
-            email: null,
             lastName: "",
             firstName: "",
             phoneNumber: "",
@@ -120,6 +118,21 @@ export default Vue.extend({
     },
 
     methods: {
+        isPhoneNumberValid(): string {
+            return utils.isPhoneNumberValid(this.phoneNumber)
+        },
+
+        isDateValid(): string{
+            return utils.isDateValid(this.dateOfBirth)
+        },
+
+        isNamevalid(name: string): string {
+            return utils.isNameValid(name)
+        },
+
+
+
+
         setValues(){
             this.firstName= this.getUser.firstName,
             this.lastName= this.getUser.lastName,
@@ -139,8 +152,6 @@ export default Vue.extend({
                 dateOfBirth: this.dateOfBirth,
                 gender: this.gender
             };
-
-            // "1900-01-01T05:00:00.000Z"
 
             store.dispatch("register/updateUser", userParams)
         },

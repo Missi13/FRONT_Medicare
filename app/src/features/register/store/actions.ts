@@ -45,9 +45,6 @@ export const updateUser: Action< RegisterState, RootState > = ({ dispatch, commi
     return new Promise((resolve, reject) => {
         const user = userParams as User;
         
-        console.log("je suis dans l'action")
-        console.log("userParams: " + userParams.lastName)
-
         api.UserController.update(user)
         .then((response) => {
 

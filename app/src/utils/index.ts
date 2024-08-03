@@ -35,7 +35,13 @@ function isDayValid(jour: string): string {
 }
 
 function isMonthValid(mois: string): string {
+    const jourRegex = /^(0[1-9]|1[0-2])$/;
     return mois === "" ? "" : "is-valid";
+}
+
+function isDateValid(date: string): string {
+    const jourRegex = /^(19+[0-9]+[0-9]|20+[0-1]+[0-9]|202+[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+    return date === "" ? "" : "is-valid";
 }
 
 function isLinkValid(value: string): string {
@@ -62,6 +68,7 @@ export const utils = {
     isYearValid,
     isDayValid,
     isMonthValid,
+    isDateValid,
     isLinkValid,
     isNumberValid,
     isAdressValid
