@@ -48,7 +48,7 @@
                                             <input type="text" maxlength="25" required class="form-control" :class="isPhoneNumberValid()" v-model="phoneNumber">
                                             <label>Numéro de téléphone</label>
                                             <div class="invalid-feedback" v-if="!isChampsValid">
-                                                Veuillez saisir un numéro de téléphone valide. Exemples: +33 6 12345678 ou 0612345678
+                                                Veuillez saisir un numéro de téléphone valide. Exemples: +213 556142261 ou 0556142261
                                             </div>
                                         </div>
                                     </div>

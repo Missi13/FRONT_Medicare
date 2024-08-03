@@ -10,7 +10,7 @@ function isEmailValid(email: string): string {
 }
 
 function isPhoneNumberValid(numero: string): string {
-    const numeroRegex = /^((0+([0-9]{9}))|(\+([0-9]{2,3} )+([1-9] )+[0-9]{8}))$/;
+    const numeroRegex = /^((\+([1-9]{1} )+([1-9]{10}))|(0+([0-9]{9}))|(\+([0-9]{2,3} )+[0-9]{9}))$/;
     return numero.length === 0 ? "" : numeroRegex.test(numero) ? "is-valid" : "is-invalid";
 }
 

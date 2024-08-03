@@ -79,7 +79,7 @@
         </div>
 
         <div class="col">
-            <router-link active-class="active" class="boutton btn" :to="{name:'update'}">
+            <router-link active-class="active" class="bouttonModifier btn" :to="{name:'update'}">
                 <span>Modifier</span>
             </router-link>
         </div>
@@ -155,7 +155,7 @@ export default Vue.extend({
 
     
 
-    .boutton{
+    .bouttonModifier{
         width: 200px;
         background: #335c67;
         color: #fff;
@@ -163,7 +163,7 @@ export default Vue.extend({
         font-size: 18px;
     }
 
-    .bouttonInscription:hover{
+    .bouttonModifier:hover{
         color:#000;
         background: #eaf8bf;
     }
