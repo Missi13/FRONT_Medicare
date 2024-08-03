@@ -12,15 +12,21 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="champs">
-                                <input type="text" maxlength="25" class="form-control" required v-model="lastName">
+                                <input type="text" maxlength="25" required class="form-control" :class="isNamevalid(lastName)" v-model="lastName">
                                 <label>Nom</label>
+                                <div class="invalid-feedback" v-if="!isChampsValid">
+                                    Ce champ doit contenir des lettres uniquement.
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-6">
                             <div class="champs">
-                                <input type="text" maxlength="25" required class="form-control" v-model="firstName">
+                                <input type="text" maxlength="25" required class="form-control" :class="isNamevalid(firstName)" v-model="firstName">
                                 <label>Prénom</label>
+                                <div class="invalid-feedback" v-if="!isChampsValid">
+                                    Ce champ doit contenir des lettres uniquement.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -28,8 +34,11 @@
                     <div class="row">
                         <div class="col">
                             <div class="champs">
-                                <input type="text" enable maxlength="25" required class="form-control" v-model="phoneNumber">
+                                <input type="text" enable maxlength="25" required class="form-control" :class="isPhoneNumberValid()" v-model="phoneNumber">
                                 <label>Numéro de téléphone</label>
+                                <div class="invalid-feedback" v-if="!isChampsValid">
+                                    Veuillez saisir un numéro de téléphone valide. Exemples: +213 556142261 ou 0556142261.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -37,8 +46,11 @@
                     <div class="row">
                         <div class="col">
                             <div class="champs">
-                                <input type="text" maxlength="25" required class="form-control" v-model="dateOfBirth">
-                                <label class="text-center">Date de naissance :</label>
+                                <input type="text" maxlength="25" required class="form-control" :class="isDateValid()" v-model="dateOfBirth">
+                                <label>Date de naissance :</label>
+                                <div class="invalid-feedback" v-if="!isChampsValid">
+                                    Veuiller saisir une date valide en format : AAAA-MM-JJ.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,13 +90,9 @@
         </div>
 
         <div class="row justify-content-center">
-            <router-link class="bouttonAnnuler btn" :to="{name:'informations'}">
-                <span>Annuler</span>
-            </router-link>
+            <router-link class="bouttonAnnuler btn" :to="{name:'informations'}">Annuler</router-link>
 
-            <button type="submit" class="bouttonEnregistrer btn" @click.prevent="updateUser()">
-                <span>Enregistrer</span>
-            </button>
+            <button type="submit" class="bouttonEnregistrer btn" @click.prevent="updateUser()">Enregistrer</button>
 
 
         </div>
@@ -118,6 +126,10 @@ export default Vue.extend({
     },
 
     methods: {
+        isNamevalid(name: string): string {
+            return utils.isNameValid(name)
+        },
+        
         isPhoneNumberValid(): string {
             return utils.isPhoneNumberValid(this.phoneNumber)
         },
@@ -125,13 +137,6 @@ export default Vue.extend({
         isDateValid(): string{
             return utils.isDateValid(this.dateOfBirth)
         },
-
-        isNamevalid(name: string): string {
-            return utils.isNameValid(name)
-        },
-
-
-
 
         setValues(){
             this.firstName= this.getUser.firstName,
@@ -153,7 +158,32 @@ export default Vue.extend({
                 gender: this.gender
             };
 
-            store.dispatch("register/updateUser", userParams)
+            if (this.lastName !== '' && utils.isNameValid(this.lastName) === 'is-valid' &&
+                this.firstName !== '' && utils.isNameValid(this.firstName) === 'is-valid' &&
+                this.phoneNumber !== '' && utils.isPhoneNumberValid(this.phoneNumber) === 'is-valid' &&
+                this.dateOfBirth !== '' &&  utils.isDateValid(this.dateOfBirth) === 'is-valid' &&
+                this.gender !== ''){
+
+                store.dispatch("register/updateUser", userParams)
+            }else{
+                this.isChampsValid = false;
+                this.isSubmitValid = false;
+                setTimeout(this.resetIsSubmit, 5000);
+            }
+
+            if (this.lastName === '' ||
+                this.firstName === '' ||
+                this.phoneNumber === '' ||
+                this.dateOfBirth === '' ||
+                this.gender === ''){
+                this.champsVide = true
+            }else{
+                this.champsVide = false
+            }
+        },
+
+        resetIsSubmit(){
+            this.isSubmitValid = true
         },
     },
 
@@ -230,15 +260,23 @@ export default Vue.extend({
         /*outline: none;*/
     }
 
-    .bouttonEnregistrer{
-        margin-left: 3px;
-    }
-
     .bouttonAnnuler{
-        margin-right: 3px;
+        margin-right: 4px;
+        border: solid #335c67 2px;
+        width: 150px;
+        background: #eaf8bf;
+        color: #335c67;
+        font-weight: 400;
+        font-size: 18px;
     }
 
-    .bouttonEnregistrer, .bouttonAnnuler{
+    .bouttonAnnuler:hover{
+        color:#fff;
+        background: #335c67;
+    }
+
+    .bouttonEnregistrer{
+        margin-left: 4px;
         width: 200px;
         background: #335c67;
         color: #fff;
@@ -246,7 +284,7 @@ export default Vue.extend({
         font-size: 18px;
     }
 
-    .bouttonEnregistrer:hover, .bouttonAnnuler:hover{
+    .bouttonEnregistrer:hover{
         color:#000;
         background: #eaf8bf;
     }

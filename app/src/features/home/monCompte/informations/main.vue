@@ -66,10 +66,10 @@
 
                     <div class="row text-center justify-content-center pt-2">
                         <div class="genres m-auto">
-                            <input type="radio" class="btn-check" name="inlineRadioOptions" id="homme" value="HOMME" required v-model="getUser.gender">
+                            <input type="radio" class="btn-check" name="inlineRadioOptions" id="homme" value="HOMME" disabled v-model="getUser.gender">
                             <label class="homme labelGenre form-control" for="homme">Homme</label>
                         
-                            <input type="radio" class="btn-check" name="inlineRadioOptions" id="femme" value="FEMME" required v-model="getUser.gender">
+                            <input type="radio" class="btn-check" name="inlineRadioOptions" id="femme" value="FEMME" disabled v-model="getUser.gender">
                             <label class="femme labelGenre form-control" for="femme">Femme </label>
                         </div>
                     </div>
