@@ -26,7 +26,7 @@
                         <td>{{ patient.dateOfBirth }}</td>
                         <td>{{ patient.email }}</td>
                         <td>{{ patient.gender }}</td>
-                        <td>{{ patient.createdDate }}</td>
+                        <td>{{ formatDate(patient.createdDate) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -43,6 +43,7 @@
 import Vue from "vue";
 import store from "@/store";
 import  { mapGetters } from 'vuex';
+import { format } from "date-fns";
 export default Vue.extend({
     name: 'ListeDesPatients',
     data(){
@@ -54,6 +55,11 @@ export default Vue.extend({
     ...mapGetters("listeDesPatients", ["getAllPatients"]),
     },
 
+    methods: {
+        formatDate(date) {
+            return format(date, 'yyyy-MM-dd')
+        }
+    },
 
     mounted(){
         store.dispatch("listeDesPatients/getAllPatients")
